@@ -1,0 +1,10 @@
+show databases;
+use demo;
+select * from job;
+select * from location;
+insert into location values(100,'hyd');
+insert into location values(102,'khammam');
+delete from location WHERE lcode = 100;
+insert into job values(102,'tavi');
+update job set name='ravi' where jobcode=102;
+ALTER TABLE job ADD salary flote(); 

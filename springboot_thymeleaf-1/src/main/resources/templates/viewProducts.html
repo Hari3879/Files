@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>View Products</title>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script
+	src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<!-- //cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css
+ --><link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css"
+	rel="stylesheet" type="text/css">
+<script>
+$(document).ready(function() {
+	$('#protab').DataTable({
+		"pagingType" : "full_numbers"
+	});
+});
+</script>
+<script>
+	function deleteConfirm(){
+		return confirm("Are you sure, you want to delete?");
+	}
+</script>
+</head>
+<body>
+	<div class="contaier-fluid" th:switch="${pro}">
+		<a th:herf="@{/loadForm}" class="btn btn-primary btn-sm mb-3">Add
+			products</a> <br/>
+			
+	<!-- 	<H3><a href="export-to-excel">export-to-excel</a>&nbsp&nbsp<a href="export-to-pdf">export-to-</a></H3> -->
+		<div th:case="null">
+			<h2>Stock is Empty</h2>
+		</div>
+		<div th:case="*">
+			<table style="width: 80%" border="1"
+				class="table table-striped table-responsive-md">
+				<thead>
+					<tr>
+					<tr>
+						<th>Id</th>
+						<th>Name</th>
+						<th>Quantity</th>
+
+						<th>Price</th>
+						<th>edit</th>
+						<th>Delete</th>
+					</tr>
+				</thead>
+				<!-- String pName;
+	private Integer qty;
+	private Integer price; -->
+				<tr th:each="pro: ${pro}">
+					<td th:text="${pro.pId}"></td> <td th:text="${pro.pName}"></td>
+					<td th:text="${pro.qty}"></td> <td th:text="${pro.price}"></td>
+					<td><a th:href="@{/editProduct/{pId}(id=${pro.pId})}"
+						class="btn btn-primary">Edit</a> </td>
+						<td>
+						<a th:href="@{/deleteProduct/{pId}(id=${pro.pId})}"
+						class="btn btn-primary">Delete</a>
+				
+			</table>
+			<tfoot>
+<div>
+<button class="btn btn-warning"><a href="pdf">PDF</a></button>
+<button class="btn btn-warning"><a href="excel">XLS</a></button>
+<button class="btn btn-warning"><a href="viewallbooks">Mail</a></button>
+</div>
+</tfoot>
+		</div>
+	</div>
+</body>
+</html>
+
+
